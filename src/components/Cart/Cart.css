@@ -1,0 +1,17 @@
+.cart-area{
+    border: 2px solid red;
+    width: 200%;
+}
+
+.summary-area{
+    text-align: center;
+    line-height: 8px;
+}
+
+.price-area{
+    line-height: 5px;
+    
+}
+
+.price-value{
+}
