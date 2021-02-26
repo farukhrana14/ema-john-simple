@@ -36,13 +36,33 @@ const Cart = (props) => {
             </div>
 
             
+            <table className='priceTable'>
+                <tbody>
+                    <tr>
+                        <td> Product price:</td>
+                        <td className='priceValue'>{formatNumber(totalPrice)}</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping Cost:</td>
+                        <td className='priceValue'>{shipping}</td>
+                    </tr>
+                    <tr>
+                        <td>Tax + VAT: </td>
+                        <td className='priceValue'>{formatNumber(tax)}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Price: </td>
+                        <td className='priceValue'>{formatNumber(allTotal)}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div className='price-area'><p> <small>Product price: <span className='price-value'>{totalPrice}</span></small></p>
+            {/* <div className='price-area'><p> <small>Product price: <span className='price-value'>{totalPrice}</span></small></p>
                 <p><small>Shipping Cost: <span className='price-value'>{shipping}</span></small></p>
                 <p><small>Tax + VAT: <span className='price-value'>{formatNumber(tax)}</span></small></p>
                 <p><small>Total Price: <span className='price-value'>{formatNumber(allTotal)}</span></small></p>
 
-            </div>
+            </div> */}
 
 
         </div>

@@ -1,11 +1,13 @@
 .cart-area{
-    border: 2px solid red;
-    width: 200%;
+    border: 1px solid lightgray;
+    width: 150%;
+    background-color: moccasin;
 }
 
 .summary-area{
+    background-color: lightslategray;
     text-align: center;
-    line-height: 8px;
+    line-height: 1.25;
 }
 
 .price-area{
@@ -13,5 +15,7 @@
     
 }
 
-.price-value{
-}
+
+table.priceTable td.priceValue {
+    text-align: right;
+  }
