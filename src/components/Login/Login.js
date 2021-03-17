@@ -3,7 +3,7 @@
 import { useContext, useState } from 'react';
 import { UserContext } from "../../App";
 import { useHistory, useLocation } from "react-router";
-import { handleGoogleSignIn, initializeLoginFramework, handleSignOut, handleFbSignIn } from './LoginManager';
+import { handleGoogleSignIn, initializeLoginFramework, handleSignOut, handleFbSignIn, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './LoginManager';
 
 
 
@@ -25,7 +25,7 @@ function Login() {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext); 
   //State and Location for ProtectedRoute
   const history = useHistory();
-  const location = useLocation;
+  const location = useLocation();
   let { from } = location.state || { from: { pathname: "/" } };
 
   const googleSignIn = () => {
@@ -82,12 +82,22 @@ function Login() {
 
   //Sign up or Sign in by Submit button for Authentication by Email and Password
   const handleSubmit = (e) => {
-    console.log(user.name, user.email, user.password);
+    
     if (newUser && user.email && user.password) {
-      
+      createUserWithEmailAndPassword(user.name, user.email, user.password)
+      .then(res => {
+        setUser(res);
+        setLoggedInUser(res);
+        history.replace(from);
+      })
     }
     if (!newUser && user.email && user.password) {
-    
+      signInWithEmailAndPassword(user.email, user.password)
+      .then(res => {
+        setUser(res);
+        setLoggedInUser(res);
+        history.replace(from);
+      })
     }
     e.preventDefault();
   }

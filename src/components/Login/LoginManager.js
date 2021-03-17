@@ -18,7 +18,8 @@ export const handleGoogleSignIn = () => {
                 isSignedIn: true,
                 name: displayName,
                 email: email,
-                photo: photoURL
+                photo: photoURL,
+                success: true
             }
             return signedInUser;
         })
@@ -33,10 +34,10 @@ export const handleFbSignIn = () => {
     const fbProvider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth().signInWithPopup(fbProvider)
         .then((result) => {
-            /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
             var user = result.user;
             var accessToken = credential.accessToken;
+            user.success = true;
             return user;
             console.log('facebook sign in status', user);
 
@@ -75,63 +76,60 @@ export const handleSignOut = () => {
         });
 }
 
-//Create new user with firebase
-// export const createUserWithEmailAndPassword = () => {
-//     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-//         .then(res => {
-//             console.log(res);
-//             const newUserInfo = { ...user };
-//             newUserInfo.error = '';
-//             newUserInfo.success = true;
-//             setUser(newUserInfo);
-//             updateUserName(user.name);
+//Create new user with Email and Password firebase
+export const createUserWithEmailAndPassword = (name, email, password) => {
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(res => {
+            console.log(res);
+            const newUserInfo = res.user;
+            newUserInfo.error = '';
+            newUserInfo.success = true;
+            updateUserName(name);
+            return newUserInfo;
 
-//         })
-//         .catch(error => {
-//             const newUserInfo = { ...user };
-//             newUserInfo.error = error.message;
-//             newUserInfo.success = false;
-//             console.log(error.message);
-//             setUser(newUserInfo);
-//         });
-// }
+        })
+        .catch(error => {
+            const newUserInfo = {};
+            newUserInfo.error = error.message;
+            newUserInfo.success = false;
+            console.log(error.message);
+            return newUserInfo;
+            
+        });
+}
 
 
-// // Sign In existing user with firebase
+// Sign In existing user with Email and Password firebase 
+export const signInWithEmailAndPassword = (email, password) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(res => {
+            const newUserInfo = res.user;
+            newUserInfo.error = '';
+            newUserInfo.success = true;
+            console.log('Signed in user info: ', res.user.displayName, res.user.email);
+            return newUserInfo;
+        })
+        .catch((error) => {
+            const newUserInfo = {};
+            newUserInfo.error = error.message;
+            newUserInfo.success = false;
+            console.log('Error', error.message);
+            return (newUserInfo);
+        });
 
-// export const signInWithEmailAndPassword = () => {
-//     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-//         .then(res => {
-//             const newUserInfo = { ...user };
-//             newUserInfo.error = '';
-//             newUserInfo.success = true;
-//             setUser(newUserInfo);
-//             setLoggedInUser(newUserInfo);
-//             history.replace(from);
-//             console.log('Signed in user info: ', res.user.displayName, res.user.email);
+}
 
-//         })
-//         .catch((error) => {
-//             const newUserInfo = { ...user };
-//             newUserInfo.error = error.message;
-//             newUserInfo.success = false;
-//             setUser(newUserInfo);
-//             console.log('Error', error.message);
-//         });
+//send user name / info to firebase when using custom sign up 
+const updateUserName = name => {
+    const user = firebase.auth().currentUser;
 
-// }
-
-// //send user name / info to firebase when using custom sign up 
-// const updateUserName = name => {
-//     const user = firebase.auth().currentUser;
-
-//     user.updateProfile({
-//         displayName: name
-//     }).then(function () {
-//         console.log('User Name Updated successful');
-//     }).catch(function (error) {
-//         console.log(error);
-//     });
-// }
+    user.updateProfile({
+        displayName: name
+    }).then(function () {
+        console.log('User Name Updated successful');
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
 
 
