@@ -31,6 +31,7 @@ function Login() {
   const googleSignIn = () => {
     handleGoogleSignIn()
     .then(res => {
+      console.log(res);
       handleResponse(res, true);
     })
   }
@@ -58,7 +59,8 @@ function Login() {
     } 
   }
 
-
+  
+  
   // Input Field Validation
   const handleBlur = (e) => {
     console.log(e.target.name, e.target.value);
@@ -69,13 +71,14 @@ function Login() {
       console.log('Email Valid');
     }
     if (e.target.name === 'password') {
-      const isPasswordValid = /\d/.test(e.target.value)
-      isFieldValid = isPasswordValid;
+      const isPasswordValid = e.target.value.length > 6; 
+      const passwordHasNumber = /\d{1}/.test(e.target.value);
+      isFieldValid = isPasswordValid && passwordHasNumber;
       
     }
 
     if (isFieldValid) {
-      const newUserInfo = { ...user };
+      const newUserInfo = { ...user};
       newUserInfo[e.target.name] = e.target.value;
       setUser(newUserInfo);
       console.log(user);
@@ -121,10 +124,10 @@ function Login() {
 
       <div>
         <h2>Own Authentication</h2>
+        
         <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id="" />
         <label htmlFor="newUser">New User Sign Up</label>
-
-
+        
         <form onSubmit={handleSubmit}>
           {newUser && <input type="text" onBlur={handleBlur} name="name" placeholder="Your name" />}
           <br />

@@ -8,6 +8,7 @@ import './Header.css';
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    
     return (
         <div className="Header">
             <img src={logo} alt=""/>
@@ -15,9 +16,11 @@ const Header = () => {
                 <Link to="/shop">Shop</Link>
                 <Link to="/review">Order Review</Link>
                 <Link to="/inventory">Manage Inventory Here</Link>
+                <p>{loggedInUser.displayName && loggedInUser.displayName}</p>
                 <button onClick={()=> setLoggedInUser({})} >Sign Out</button>
                 
-                </nav>
+                
+            </nav>
         </div>
     );
 };
