@@ -17,11 +17,11 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
-function App(props) {
+function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
     <UserContext.Provider value ={[loggedInUser, setLoggedInUser]}>
-     <h3>email: {loggedInUser.email}</h3>
+     {loggedInUser.email ? <div> <span>Email:</span> {loggedInUser.email}</div> : ""} 
      <Router>
       <Header></Header>
         <Switch>
