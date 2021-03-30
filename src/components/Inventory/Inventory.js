@@ -1,19 +1,33 @@
 import React from 'react';
-import fakeData from '../../fakeData';
+import './Inventory.css';
+
 
 const Inventory = () => {
 
     const handleAddProductDb = () => {
-        fetch('http://localhost:5000/addProducts', {
+
+        const product = {};
+
+        fetch('http://localhost:5000/addProduct', {
             method: 'POST',
             headers: {'Content-Type': 'Application/Json'},
-            body: JSON.stringify(fakeData)
+            body: JSON.stringify(product)
         })
     }
 
     return (
-        <div>
-            <button onClick={handleAddProductDb}>Add Product</button>
+        <div className='inventory-main-div'>
+            <form onSubmit={handleAddProductDb}>
+                <p><span>Name:</span> <input type="text"/></p>
+                <p><span>Price:</span> <input type="text"/></p>
+                <p><span>Quantity</span> <input type="text"/></p>
+                <p><span>Product Image:</span> <input type="file"/></p>
+
+
+               <button onClick={handleAddProductDb}>Add Product</button>
+
+            </form>
+
         </div>
     );
 };
