@@ -27,7 +27,7 @@ const Review = () => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
 
-        fetch('http://localhost:5000/productsByKeys', {
+        fetch('https://emajohn-server.herokuapp.com/productsByKeys', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(productKeys)
@@ -41,12 +41,16 @@ const Review = () => {
     if(orderPlaced){
         thankYou = <img src={happyImage} alt=""/>;
     }
+   
     return (
         <div className='twin-container'>
             
             <div className='product-container'>
             {
-                cart.map(pd => <ReviewItem product={pd} key={pd.key} removeProduct={removeProduct} ></ReviewItem>)
+                cart.map(pd => <ReviewItem 
+                    key={pd.key} 
+                    removeProduct={removeProduct}
+                    product={pd}></ReviewItem>)
             }
             {thankYou}
             

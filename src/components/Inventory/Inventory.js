@@ -8,7 +8,7 @@ const Inventory = () => {
 
         const product = {};
 
-        fetch('http://localhost:5000/addProduct', {
+        fetch('https://emajohn-server.herokuapp.com/addProduct', {
             method: 'POST',
             headers: {'Content-Type': 'Application/Json'},
             body: JSON.stringify(product)

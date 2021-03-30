@@ -14,7 +14,7 @@ const Shipment = () => {
         const savedCart = getDatabaseCart();
         const orderDetails = {customer: {...loggedInUser}, products: savedCart, shipment: data, orderTime: new Date()};
     
-        fetch('http://localhost:5000/addOrder', {
+        fetch('https://emajohn-server.herokuapp.com/addOrder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(orderDetails)
