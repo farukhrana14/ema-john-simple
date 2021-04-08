@@ -14,7 +14,7 @@ const Shop = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/products?search=" + search)
+    fetch("https://emajohn-server.herokuapp.com/products?search=" + search)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [search]);
@@ -57,6 +57,8 @@ const Shop = () => {
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
+
+ 
 
   return (
     <div>

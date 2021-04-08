@@ -129,11 +129,11 @@ function Login() {
         <label htmlFor="newUser">New User Sign Up</label>
         
         <form onSubmit={handleSubmit}>
-          {newUser && <input type="text" onBlur={handleBlur} name="name" placeholder="Your name" />}
+          {newUser && <input type="text" onBlur={handleBlur} name="name" placeholder="Your name" autoComplete='username' />}
           <br />
-          <input type="text" onBlur={handleBlur} name="email" placeholder="Email ID" required />
+          <input type="text" onBlur={handleBlur} name="email" placeholder="Email ID" autoComplete='email' required />
           <br />
-          <input type="password" onBlur={handleBlur} name="password" id="" placeholder="Password" required />
+          <input type="password" onBlur={handleBlur} name="password" id="" placeholder="Password" autoComplete='current-password' required />
           <br />
           <input type="submit" value={newUser ? 'Sign up' : 'Sign in'} />
         </form>
