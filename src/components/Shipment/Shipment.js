@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../../App';
 import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
@@ -9,11 +9,21 @@ const Shipment = () => {
 
     const { register, handleSubmit, watch, errors } = useForm();
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [shippingData, setShippingData] = useState();
 
     const onSubmit = data => {
-        console.log( 'form submitted', data)
+           setShippingData(data);
+    };
+
+    const handlePaymentSuccess =(paymentInfo) => {
+        
         const savedCart = getDatabaseCart();
-        const orderDetails = {customer: {...loggedInUser}, products: savedCart, shipment: data, orderTime: new Date()};
+        const orderDetails = {
+            customer: {...loggedInUser}, 
+            products: savedCart, 
+            shipment: shippingData, 
+            paymentInfo: paymentInfo,
+            orderTime: new Date()};
     
         fetch('https://emajohn-server.herokuapp.com/addOrder', {
             method: 'POST',
@@ -27,15 +37,13 @@ const Shipment = () => {
                 alert('Your order is placed successfully.')
             }
         })
-    
-    
-    };
+    }
 
     // console.log(watch("example")); // watch input value by passing the name of it
 
     return (
         <div className="row">
-            <div className="col-md-6">
+            <div style={{display: shippingData ? 'none' : 'block'}} className="col-md-6">
                 < form className='ship-form' onSubmit = { handleSubmit(onSubmit) } >
                 < input name = "name" defaultValue={loggedInUser.name} ref = {register({ required: true })} placeholder='Your Name' />
                 { errors.name && <span className='error'>Name is required</span> }
@@ -57,9 +65,9 @@ const Shipment = () => {
             </div>
 
 
-            <div className="col-md-6">
+            <div style={{display: shippingData ? 'block' : 'none'}} className="col-md-6">
                 <h2>Payment options</h2>
-                <ProcessPayment></ProcessPayment>
+                <ProcessPayment handlePayment = {handlePaymentSuccess}></ProcessPayment>
             </div>
         </div>
   );
