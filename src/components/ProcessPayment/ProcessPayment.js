@@ -12,7 +12,6 @@ const stripePromise = loadStripe(
 const processPayment = ({handlePayment}) => {
   return (
     <Elements stripe={stripePromise}>
-      
       <SimpleCardForm handlePayment={handlePayment} />
     </Elements>
   );

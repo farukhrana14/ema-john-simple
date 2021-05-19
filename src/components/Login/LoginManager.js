@@ -50,7 +50,7 @@ export const handleFbSignIn = () => {
             var accessToken = credential.accessToken;
             user.success = true;
             return user;
-            console.log('facebook sign in status', user);
+            // console.log('facebook sign in status', user);
 
             // ...
         })
