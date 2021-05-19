@@ -4,10 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Codes 
 
-[Live-site](https://doctors-portal-farukh.web.app)
-[Git-repo](https://github.com/farukhrana14/ema-john-simple)
-[Git-server](https://github.com/farukhrana14/ema-john-server)
-[Heroku](https://emajohn-server.herokuapp.com)
+- [Live-site](https://emajohn-react.web.app)
+- [Git-repo](https://github.com/farukhrana14/ema-john-simple)
+- [Git-server](https://github.com/farukhrana14/ema-john-server)
+- [Heroku](https://emajohn-server.herokuapp.com)
 
 ### Packages and Libraries used  
 - react-fontawesome
